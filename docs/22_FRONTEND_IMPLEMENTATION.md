@@ -35,8 +35,16 @@ frontend/
 │   └── utils/               # Color interpolation, geometry, time formatting
 ```
 
-## 2. Rendering the Signature Interactive Jigsaw Map
-The Jigsaw Map is rendered using high-performance SVG (Scalable Vector Graphics) directly in React:
-- **Junction Nodes:** Rendered as interactive circular SVG nodes with junction badges (`<circle>`, `<text>`).
-- **Road Links:** Rendered as directed vector splines (`<path d="..." />`) with stroke widths corresponding to road capacity and stroke colors bound dynamically to real-time status (`GREEN` for Open, `CRIMSON` for Blocked).
-- **Missing Puzzle Piece Effect:** When an edge is marked `BLOCKED`, the line transitions to an animated dashed pattern (`stroke-dasharray="8 6"`) with a red pulsating outline and a missing jigsaw puzzle cutout icon centered on the road link.
+## 2. Rendering the Real Digital Vector Road Map
+The user-facing interface does **not** display abstract puzzle shapes or node-link diagrams. Instead, the UI renders a **real digital vector road map** (Google-Maps-style interactive visual presentation) using high-performance React SVG:
+
+- **Vector Road Geometry:** Drivable road corridors are drawn as crisp, weighted vector splines matching geographic junction coordinates.
+- **Dynamic Traffic State Colors:**
+  - 🟢 **Green Road:** Normal flow or recommended optimal route.
+  - 🟡 **Yellow Road:** Slow traffic segment.
+  - 🔴 **Red Road:** Congested bottleneck corridor.
+  - ⚫ **Black Road / 🚧:** Blocked segment (protest, accident, construction).
+- **Map Overlays & Pins:**
+  - 📍 **Start Location & Destination Pins** clearly mark origin and target junctions.
+  - ➡️ **Route Highlight Path:** Animates with directional highlights along the recommended detour corridor.
+- **Interactive Inspection:** Hovering or clicking on any road link displays the Selected Link HUD drawer with live camera snapshots, velocity, and occupancy metrics.

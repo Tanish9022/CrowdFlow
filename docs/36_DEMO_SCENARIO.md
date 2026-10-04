@@ -9,16 +9,16 @@ The end-to-end oral examination demo is structured as a clear 5-act narrative de
 - CCTV feeds display smooth simulated vehicular flow.
 - A standard route query from Junction 1 to Junction 6 selects the direct corridor via Road $R_3$ (Total travel time: 3.5 minutes).
 
-### Act 2: Sudden Disruption Event (The Missing Puzzle Piece)
+### Act 2: Sudden Disruption Event (Protest / Accident)
 - On Road $R_3$ (JM Road North), a simulated protest rally or multi-vehicle collision occurs.
 - CCTV feed for Camera 3 shows vehicles slowing to zero velocity, dense pedestrian clusters on the road, and queue persistence exceeding 120 seconds.
 - The Traffic State Engine automatically flags Road $R_3$ as `BLOCKED`.
-- Dashboard triggers an audio-visual warning: **"JIGSAW DISRUPTION DETECTED: ROAD R3 COMPROMISED"**.
+- Dashboard triggers a red alert ticker: **"CRITICAL DISRUPTION DETECTED: ROAD R3 (JM ROAD) COMPROMISED"**.
 
-### Act 3: Jigsaw Graph Recalculation
-- The road network map animates: the segment for Road $R_3$ disappears/flashes red as a missing puzzle piece.
-- Dynamic weight $W(R_3)$ is updated to $\infty$.
-- The route optimization engine recalculates the route from Junction 1 to Junction 6: Road $R_3$ is avoided; the system plots the detour via $J_1 \to J_4 \to J_5 \to J_6$ (Roads $R_4, R_6, R_7$).
+### Act 3: Dynamic Graph Recalculation & Real Map Rerouting
+- The real digital road map instantly updates: Road $R_3$ turns black with a 🚧 roadblock marker.
+- Dynamic impedance weight $W(R_3)$ is updated to $\infty$ in the backend graph engine.
+- The route optimization engine recalculates the optimal path from Junction 1 to Junction 6: Road $R_3$ is avoided; the system highlights the new recommended green detour corridor via $J_1 \to J_4 \to J_5 \to J_6$ (Roads $R_4, R_6, R_7$).
 
 ### Act 4: What-If Redistribution Simulation
 - The operator navigates to the Simulation tab to investigate downstream impact.
