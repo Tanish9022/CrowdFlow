@@ -8,9 +8,9 @@
 
 ## 1. Executive Status Summary
 - **Current State:** Fully Operational End-to-End Academic Prototype.
-- **Architectural Principle:** CCTV Perception $\to$ Traffic Intelligence $\to$ Dynamic Road Graph $\to$ Jigsaw Engine $\to$ Simulation $\to$ Recommendation.
-- **Backend:** FastAPI service running with SQLite database (`crowd_flow.db`), NetworkX Jigsaw Graph, BPR dynamic impedance, modified Dijkstra routing, What-If macroscopic redistribution simulation, and Webster signal advisory engine.
-- **Frontend:** React 18 + Vite production build (`dist/`) with Obsidian Command Center dark theme, interactive SVG Jigsaw map with animated missing puzzle pieces, multi-stream CCTV grid, What-If simulation workbench, Route optimizer, and Signal Advisory panel.
+- **Architectural Principle:** CCTV Perception $\to$ YOLOv8 & Tracking $\to$ Traffic Density $\to$ Internal Dynamic Road Graph $\to$ Dijkstra Route Optimizer $\to$ Real Digital Map Visualization.
+- **Backend:** FastAPI service running with SQLite database (`crowd_flow.db`), NetworkX dynamic impedance graph, modified Dijkstra routing, What-If macroscopic redistribution simulation, and Webster signal advisory engine.
+- **Frontend:** React 18 + Vite production build (`dist/`) with Obsidian Command Center dark theme, Google-Maps-style real vector road network map with live traffic flow color overlays (🟢 🟡 🔴 ⚫ 📍 ➡️), multi-stream CCTV grid, What-If simulation workbench, Route optimizer, and Signal Advisory panel.
 - **Verification:** All 5 API integration test suites passed (`tests/test_api_endpoints.py`), and the 5-Act Viva demonstration script (`scripts/run_demo_scenario.py`) executed with 100% success.
 
 ---
@@ -21,14 +21,14 @@
 | :--- | :---: | :--- | :--- |
 | **Documentation Suite (40 MDs)** | ✅ Completed | `/docs/*` | 40 canonical design files established |
 | **Database Schema & Models** | ✅ Completed | `backend/app/models/*` | SQLite seeded with Pune Urban Model Network |
-| **Road Graph Jigsaw Engine** | ✅ Completed | `backend/app/graph/jigsaw_engine.py` | BPR impedance & missing piece invalidation |
+| **Internal Road Graph Engine** | ✅ Completed | `backend/app/graph/jigsaw_engine.py` | BPR dynamic impedance & disrupted link cost calculation |
 | **Dynamic Dijkstra Routing** | ✅ Completed | `backend/app/routing/dijkstra.py` | Avoids blocked links; computes K detours |
 | **What-If Redistribution Sim** | ✅ Completed | `backend/app/simulation/redistributor.py` | Logit discrete-choice capacity model |
 | **Advisory Signal Engine** | ✅ Completed | `backend/app/recommendations/signal_engine.py` | Webster equisaturation green split recalculation |
 | **YOLOv8 & Tracking Pipeline** | ✅ Completed | `backend/app/cv/*` | Object detector, Centroid tracker, ROI filter |
 | **Traffic State Engine** | ✅ Completed | `backend/app/traffic/state_engine.py` | 8 traffic states; vehicle detection $\neq$ traffic |
 | **REST & Streaming Endpoints** | ✅ Completed | `backend/app/api/*` | Network, Routing, Simulation, Signals, Cameras |
-| **Obsidian UI & SVG Jigsaw Map** | ✅ Completed | `frontend/src/*` | React 18 production bundle compiled |
+| **Obsidian UI & Real Vector Map** | ✅ Completed | `frontend/src/*` | React 18 production bundle with Google-Maps-style vector map |
 | **5-Act Viva Demo Script** | ✅ Completed | `scripts/run_demo_scenario.py` | Step-by-step oral presentation rehearsal |
 | **Integration Test Suite** | ✅ Completed | `tests/test_api_endpoints.py` | Verified all 5 core subsystems |
 

@@ -28,18 +28,23 @@ In a classic jigsaw puzzle, every interlocking piece must fit to maintain struct
                          (Detour diverted via R4 & R5)
 ```
 
-## 3. Dynamic Edge Weight (Cost) Formula
-Crowd Flow does not route purely on physical distance $d(e)$. Edge cost represents **Generalized Impedance** incorporating delay, congestion, and capacity saturation:
+## 4. Internal Engine vs. Real Map UI Distinction
+It is critical to distinguish between **internal graph computation** and **user interface presentation**:
 
-$$W(e) = d(e) \cdot \left[ 1 + \alpha \cdot \left(\frac{q(e)}{C(e)}\right)^\beta \right] \cdot \left( \frac{v_{\text{free}}(e)}{\max(v_{\text{min}}, \bar{v}(e))} \right) + \Omega(e)$$
+- **Internal Backend Graph ($G=(V,E)$):** NetworkX and Python algorithms represent roads as abstract nodes and edges with dynamic BPR impedance weights ($W(e)$). Pathfinding (Dijkstra / Yen's K-Shortest) calculates:
+  $$\text{Start} \to A \to B \to E \to H \to \text{Destination}$$
+- **User-Facing Presentation (Real Digital Map):** The user does **not** see an abstract node graph or puzzle shapes. Instead, the UI renders a **real digital road map** (Google-Maps-like vector navigation canvas):
+  - 🟢 **Green Road:** Normal / Recommended route.
+  - 🟡 **Yellow Road:** Slow traffic flow.
+  - 🔴 **Red Road:** Congested bottleneck corridor.
+  - ⚫ **Black Road / 🚧:** Disabled / Blocked segment.
+  - 📍 **Start & Destination Pins:** Origin and target junctions.
+  - ➡️ **Highlighted Route:** Overlaid path showing the newly computed optimal detour.
 
-Where:
-- $d(e)$: Physical road length in meters.
-- $q(e)$: Observed or estimated vehicle volume (vehicles/hour).
-- $C(e)$: Practical capacity of the road segment (vehicles/hour).
-- $\alpha, \beta$: Standard BPR (Bureau of Public Roads) calibration coefficients (default: $\alpha = 0.15, \beta = 4.0$).
-- $v_{\text{free}}(e)$: Design free-flow speed (e.g., $50\text{ km/h}$).
-- $\bar{v}(e)$: Current real-time average speed measured via CCTV.
-- $v_{\text{min}}$: Speed lower-bound threshold ($2.0\text{ km/h}$) to prevent division by zero.
-- $\Omega(e)$: Penalty term:
-  $$\Omega(e) = \begin{cases} 0 & \text{if status is OPEN} \\ 500 & \text{if status is SLOW} \\ 2000 & \text{if status is CONGESTED} \\ \infty & \text{if status is BLOCKED} \end{cases}$$
+```mermaid
+graph TD
+    CCTV["CCTV Observation"] --> Classify["Traffic State Classification"]
+    Classify --> InternalGraph["Internal BPR Graph Update"]
+    InternalGraph --> Dijkstra["Dijkstra Route Calculation"]
+    Dijkstra --> MapUI["Real Digital Map Overlay (Google-Maps-Style)"]
+```

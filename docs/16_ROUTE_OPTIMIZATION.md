@@ -50,4 +50,36 @@ To prevent creating a secondary bottleneck by dumping 100% of diverted traffic o
 - **Path 2 (Secondary Detour):** Next best corridor utilizing an adjacent parallel arterial.
 - **Path 3 (Tertiary Detour):** Outer ring bypass route for heavy multi-axle vehicles/buses.
 
-The operator dashboard displays all $K$ alternatives with relative travel time estimations and capacity headrooms.
+## 4. Real Digital Map UI & Recommendation Output
+The algorithm results are rendered on a **real digital road map interface** (Google-Maps-style visual presentation):
+
+```mermaid
+graph TD
+    Start["📍 Start Node"] --> Check{"🔴 Road Blocked Event"}
+    Check -->|Link Invalidated| Dijkstra["Dynamic Dijkstra Pathfinding"]
+    Dijkstra -->|K-Shortest Detours| Recs["Route Recommendation Panel"]
+    Recs --> Map["Google-Maps-Style Vector Map Overlay"]
+```
+
+### Map Layer Visual Overlays
+- 🟢 **Green Road:** Normal / Recommended detour path.
+- 🟡 **Yellow Road:** Slow traffic segment.
+- 🔴 **Red Road:** Congested bottleneck segment.
+- ⚫ **Black Road / 🚧:** Blocked corridor (accident, protest, VIP movement).
+- 📍 **Start & Destination Pins:** Origin and target junction locations.
+- ➡️ **Route Highlight:** Dynamic animated directional path overlay.
+
+### Recommendation Panel Specification
+Beside the interactive vector map, the UI displays clear routing telemetry:
+
+```text
+┌─────────────────────────────────────────────────────────┐
+│ 🟢 RECOMMENDED OPTIMAL CORRIDOR                         │
+│ Route A ➔ Route B ➔ Route C                              │
+│                                                         │
+│ ⏱️ Estimated Time: 18 min                               │
+│ 🚥 Traffic Density: Low (Normal Flow)                   │
+│ 📏 Total Distance: 7.2 km                               │
+│ 💡 Reason: Avoids severe congestion at Deccan Junction   │
+└─────────────────────────────────────────────────────────┘
+```

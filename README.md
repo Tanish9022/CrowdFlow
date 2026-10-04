@@ -25,7 +25,7 @@ Crowd Flow models an urban traffic network as a **Dynamic Jigsaw Puzzle**. Durin
 ### System Architecture Pipeline
 ```
 CCTV Perception
-  │  (YOLOv8 Detection + ByteTrack Tracking)
+  │  (YOLOv8 Detection + ByteTrack / Centroid Tracking)
   ▼
 Traffic Feature Extraction
   │  (Velocity, Density, Stationary Duration, Queue Persistence)
@@ -33,13 +33,16 @@ Traffic Feature Extraction
 Traffic-State Engine
   │  (Distinguishes Signal Queues vs Real Congestion vs Parked Cars)
   ▼
-Dynamic Road Graph (Jigsaw Engine)
-  │  (Graph Impendance Costs, Missing Piece Invalidation)
+Internal Dynamic Road Graph (BPR Impedance Engine)
+  │  (Generalized Cost Calculation & Disrupted Link Invalidation)
   ▼
 Alternative Detour Routing & What-If Simulation
-  │  (Dijkstra / A* Paths, Macroscopic Capacity Spillover)
+  │  (Dynamic Dijkstra Paths, Macroscopic Capacity Spillover)
   ▼
-Advisory Signal Recommendations & Command Dashboard
+Real Digital Road Map Visualization & Advisory Panel
+  │  (Google-Maps-Style Vector Map Overlay: 🟢 🟡 🔴 ⚫ 📍 ➡️)
+  ▼
+Signal Recommendations & Command Dashboard
      (Webster Green Rebalancing, Obsidian TOC Interface)
 ```
 

@@ -5,8 +5,8 @@ Crowd Flow is designed as an **Industrial Municipal Traffic Operations Command C
 
 The visual language communicates:
 - **Real-Time Responsiveness:** Pulsing status indicators, live telemetry readouts.
-- **Safety Criticality:** High-contrast semantic traffic colors (Green = Open, Amber = Slow/Queue, Red = Congested, Crimson = Blocked).
-- **Spatial Intelligence:** Custom vector-rendered Jigsaw road topology.
+- **Safety Criticality:** High-contrast semantic traffic colors (Green = Open/Recommended, Yellow = Slow/Queue, Red = Congested, Crimson/Black = Blocked).
+- **Spatial Intelligence:** Google-Maps-like real vector road network visualization overlaid with live traffic density and dynamic route highlights.
 
 ## 2. Color Palette & Design Tokens
 
@@ -24,11 +24,11 @@ The visual language communicates:
   --text-muted: #6b7280;       /* Timestamps & minor legends */
 
   /* Semantic Traffic State Colors */
-  --traffic-open: #10b981;      /* Emerald Green (Free Flow) */
+  --traffic-open: #10b981;      /* Emerald Green (Free Flow / Recommended Route) */
   --traffic-slow: #f59e0b;      /* Amber / Orange (Reduced Speed) */
   --traffic-queue: #eab308;     /* Signal-induced queue (Yellow) */
   --traffic-congested: #ef4444; /* Bright Red (Over capacity) */
-  --traffic-blocked: #dc2626;   /* Deep Crimson / Flashing (Missing Jigsaw Piece) */
+  --traffic-blocked: #dc2626;   /* Deep Crimson / Black (Blocked Road Marker) */
   --traffic-crowd: #8b5cf6;     /* Purple (Pedestrian surge / Protest) */
 
   /* Accent & Action Colors */
@@ -55,6 +55,10 @@ The visual language communicates:
 
 ## 4. UI Component Guidelines
 1. **Cards & Widgets:** Rounded corners ($8\text{px}$), subtle glassmorphism border (`1px solid var(--border-subtle)`), deep drop shadows (`0 4px 20px rgba(0,0,0,0.4)`).
-2. **Jigsaw Road Rendering:** Road segments rendered with thick SVG paths ($6\text{px}-10\text{px}$) colored by their dynamic state. Blocked segments render with dashed animated borders or missing cutouts.
-3. **Buttons & Controls:** Clear hover transitions (200ms ease), focused accessibility outlines, disabled states clearly marked with 50% opacity and `cursor: not-allowed`.
-4. **Alert Banners:** Non-intrusive sticky top/side notifications with dismiss and "Investigate on Map" deep-links.\n
+2. **Real Digital Road Map Rendering:** Road network rendered with crisp SVG vector geometry ($6\text{px}-10\text{px}$ strokes) matching geographic junction coordinates. Roads are dynamically color-coded: 🟢 Green (Open/Recommended), 🟡 Yellow (Slow), 🔴 Red (Congested), and ⚫ Black (Blocked).
+3. **Map Markers & Route Highlights:**
+   - 📍 **Start & Destination Pins** indicate origin and target junctions.
+   - 🚧 **Incident Markers** highlight active protest/accident locations.
+   - ➡️ **Recommended Detour Path** pulses with animated directional highlights.
+4. **Buttons & Controls:** Clear hover transitions (200ms ease), focused accessibility outlines, disabled states clearly marked with 50% opacity and `cursor: not-allowed`.
+5. **Alert Banners:** Non-intrusive sticky top/side notifications with dismiss and "Investigate on Map" deep-links.\n

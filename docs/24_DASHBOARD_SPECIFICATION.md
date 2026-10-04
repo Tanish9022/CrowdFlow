@@ -3,29 +3,30 @@
 ## 1. Dashboard Layout Architecture
 The main dashboard operates as the central cockpit for traffic surveillance and incident management.
 
-```
+```text
 +-----------------------------------------------------------------------------------------+
 | [CROWD FLOW LOGO]   Pune Central TOC   [6 Cameras] [2 Congested] [1 Blocked] [Admin]    |
 +-------------------------------------------------------------------+---------------------+
 |                                                                   | SELECTED ROAD HUD   |
 |                                                                   | Road: JM_ROAD_NORTH |
-|                    DYNAMIC JIGSAW ROAD MAP                        | Status: CONGESTED   |
+|                  REAL DIGITAL ROAD MAP OVERLAY                    | Status: CONGESTED   |
 |                                                                   | Occupancy: 84%      |
-|    [J1] ====(R1: Open)====> [J2] ====(R2: Slow)====> [J3]         | Avg Speed: 9 km/h   |
-|      |                        |                        |          | Queue: 62m (14 veh) |
-|      | (R4: Open)             | (R5: Open)             | (R3: ❌) |                     |
-|      v                        v                        v          | [Mini CCTV Stream]  |
-|    [J4] ====(R6: Detour) ==> [J5] ====(R7: Detour) => [J6]        |                     |
+|    📍[J1] ───🟢 (R1: Normal)──► 📍[J2] ───🟡 (R2: Slow)──► [J3]    | Avg Speed: 9 km/h   |
+|       │                          │                     │          | Queue: 62m (14 veh) |
+|       │ (R4: Normal)             │ (R5: Detour)        │ (R3: 🔴) |                     |
+|       ▼                          ▼                     ▼          | [Mini CCTV Stream]  |
+|    [J4] ───🟢 (R6: Detour) ───► [J5] ───🟢 (R7) ────► 📍[Dest]    |                     |
+|                                                                   | [TOGGLE BLOCKAGE]   |
 |                                                                   | [RUN SIMULATION]    |
-|                                                                   | [MANUAL OVERRIDE]   |
 +-------------------------------------------------------------------+---------------------+
-| REAL-TIME ALERTS TICKER                                           | ADVISORY SUMMARY    |
-| 19:31:02 - Alert: Road R3 Blocked (Pedestrian Protest detected)   | J05: +15s Green (NS)|
-| 19:30:45 - Congestion on R2 (Queue persistence > 90s)             | J03: -10s Green (EW)|
+| REAL-TIME DISRUPTION TICKER                                       | ADVISORY SUMMARY    |
+| 🔴 CRITICAL: Road R03 (JM Road) is compromised by Protest Rally   | Deccan Jct: +15s NS |
+| 🟢 Dynamic Detour Rerouting active via FC Road & Karve Corridor   | Swargate: +10s EW   |
 +-------------------------------------------------------------------+---------------------+
 ```
 
 ## 2. Interactive Telemetry Widgets
-1. **Network Health Ring:** Circular progress bar showing total network capacity utilization.
-2. **Speed Distribution Gauge:** Real-time speedometer of average corridor velocity.
-3. **Missing Jigsaw Notification Banner:** Flashing alert when an edge impedance becomes infinite.
+1. **Real Digital Vector Map:** Displays Pune road geometry with live color-coded link saturation (🟢 Open/Recommended, 🟡 Slow, 🔴 Congested, ⚫ Blocked, 📍 Start/Destination pins, ➡️ Detour highlights).
+2. **Network Health Ring:** Circular progress bar showing total network capacity utilization.
+3. **Selected Link Drawer:** Inspection panel with live CCTV snapshot, speed metrics, occupancy ratio, and one-click manual block/reopen toggle.
+4. **Advisory Signal Panel:** Synchronized green-split recommendations for downstream detour junctions.
