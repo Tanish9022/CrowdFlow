@@ -21,3 +21,22 @@
 - **Context:** Routing purely on physical distance fails to divert traffic away from choked corridors.
 - **Decision:** Implement BPR-inspired dynamic cost function incorporating distance, occupancy ratio, speed degradation, and infinite impedance for severed links.
 - **Rationale:** Mathematically rigorous, standard in transportation engineering, and highly explainable in an academic viva.
+
+
+## Key Decision Tree
+
+`mermaid
+flowchart TD
+    D1{"Map Visualization?"} -- "Puzzle/Jigsaw" --> R1["Rejected: Not production-realistic"]
+    D1 -- "Real Digital Map with Leaflet + OSM" --> A1["Accepted: Google Maps-style UX"]
+
+    D2{"Object Detector?"} -- "YOLOv5" --> R2["Rejected: Older architecture"]
+    D2 -- "YOLOv8 Nano" --> A2["Accepted: Best speed/accuracy tradeoff"]
+
+    D3{"Database?"} -- "PostgreSQL" --> R3["Rejected: Overkill for demo"]
+    D3 -- "SQLite with WAL" --> A3["Accepted: Zero-config, concurrent reads"]
+
+    D4{"Routing Algorithm?"} -- "A* with heuristic" --> R4["Rejected: Heuristic calibration needed"]
+    D4 -- "Modified Dijkstra" --> A4["Accepted: Exact shortest path, simple"]
+`
+

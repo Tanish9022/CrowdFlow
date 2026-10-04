@@ -18,3 +18,18 @@
 - **Graph & Routing Algorithms:** $100\%$ branch coverage (Dijkstra, infinite impedance, multi-path detour).
 - **Traffic State Classification Rules:** $\ge 95\%$ coverage across all 8 traffic states.
 - **API Endpoints:** $\ge 90\%$ coverage for authentication, routing, and simulation routers.
+
+
+## Testing Pyramid
+
+`mermaid
+flowchart BT
+    subgraph "Testing Layers"
+        UT["Unit Tests - Models, Engines, Algorithms"]
+        IT["Integration Tests - API Endpoints + Database"]
+        E2E["End-to-End Tests - Full Workflow Demo"]
+    end
+
+    UT --> IT --> E2E
+`
+

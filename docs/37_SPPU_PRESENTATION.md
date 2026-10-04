@@ -31,3 +31,23 @@ This slide-by-slide structure aligns directly with the SPPU CS-331-FP final exam
 - **Slide 11: Limitations & Future Scope**
   - Real-world camera calibration challenges, multi-agent reinforcement learning.
 - **Slide 12: Conclusion & Acknowledgments**
+
+
+## Presentation Structure
+
+`mermaid
+flowchart LR
+    S1["Slide 1: Title + Team"] --> S2["Slide 2: Problem Statement"]
+    S2 --> S3["Slide 3: Objectives"]
+    S3 --> S4["Slide 4: System Architecture"]
+    S4 --> S5["Slide 5: CV Pipeline"]
+    S5 --> S6["Slide 6: Jigsaw Graph Engine"]
+    S6 --> S7["Slide 7: Route Optimization"]
+    S7 --> S8["Slide 8: What-If Simulation"]
+    S8 --> S9["Slide 9: Signal Advisory"]
+    S9 --> S10["Slide 10: Live Demo"]
+    S10 --> S11["Slide 11: Results + Metrics"]
+    S11 --> S12["Slide 12: Future Scope"]
+    S12 --> S13["Slide 13: References"]
+`
+

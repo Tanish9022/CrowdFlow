@@ -32,3 +32,29 @@ backend/
 - **Web Requests:** Handled asynchronously via `async def` endpoints on the Uvicorn ASGI event loop.
 - **Computer Vision Inference:** Video decoding and YOLO tensor calculations run in dedicated background worker threads or sub-processes (`asyncio.to_thread` / `concurrent.futures.ThreadPoolExecutor`) to prevent blocking API request handling.
 - **In-Memory Cache:** Current dynamic graph weights and active camera states are cached in thread-safe in-memory singletons, with asynchronous periodic persistence to the relational database.
+
+
+## 3. Backend Request Processing Architecture
+
+`mermaid
+flowchart TD
+    A["HTTP Request"] --> B["Uvicorn ASGI Server"]
+    B --> C["FastAPI Middleware"]
+    C --> D{"Auth Required?"}
+    D -- Yes --> E["JWT Verification"]
+    D -- No --> F["Health Check / Public"]
+    E --> G["Route to API Endpoint"]
+    F --> G
+    G --> H{"Endpoint Type"}
+    H -- "Graph/Network" --> I["Jigsaw Graph Engine - In Memory"]
+    H -- "CRUD" --> J["SQLAlchemy ORM - Database"]
+    H -- "CV Stream" --> K["Background Thread Pool"]
+    H -- "Simulation" --> L["Redistribution Engine"]
+    I --> M["JSON Response"]
+    J --> M
+    K --> N["MJPEG StreamingResponse"]
+    L --> M
+    M --> O["Client"]
+    N --> O
+`
+

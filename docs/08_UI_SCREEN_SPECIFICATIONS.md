@@ -48,3 +48,26 @@ The Crowd Flow frontend comprises 14 specialized operator screens:
   - Segments colored dynamically (`GREEN` $\to$ `YELLOW` $\to$ `RED` $\to$ `CRIMSON`).
   - Blocked links render with a missing puzzle slot animation and flashing warning badge: `[BLOCKED: PIECE REMOVED]`.
   - Recalculated detour paths pulse in vibrant cyan with directional animation.\n
+
+
+## 3. Screen Navigation Flow
+
+`mermaid
+flowchart TD
+    LOGIN["/login - Authentication"] --> DASH["/ - Main Command Dashboard"]
+    DASH --> MON["/monitoring - Live CCTV Grid"]
+    DASH --> MAP["/jigsaw-map - Network Map"]
+    DASH --> ROUTE["/routes - Route Optimizer"]
+    DASH --> SIM["/simulator - What-If Simulator"]
+    DASH --> SIG["/signals - Signal Advisory"]
+    DASH --> ANALYTICS["/analytics - Traffic Analysis"]
+    DASH --> ALERTS["/alerts - Blocked Road Alerts"]
+    DASH --> SETTINGS["/settings - System Settings"]
+
+    MON --> DASH
+    MAP --> DASH
+    ROUTE --> DASH
+    SIM --> DASH
+    SIG --> DASH
+`
+

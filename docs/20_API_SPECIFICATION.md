@@ -36,3 +36,39 @@ The backend exposes high-performance asynchronous REST endpoints along with WebS
 
 ### 2.7 WebSocket Real-Time Telemetry
 - `WS /api/v1/ws/telemetry`: Continuous broadcast of network metrics, active alerts, and camera FPS updates at $1\text{ Hz}$.
+
+
+## 3. API Request Flow
+
+`mermaid
+sequenceDiagram
+    actor Operator as Traffic Operator
+    participant UI as React Frontend
+    participant API as FastAPI Backend
+    participant Auth as JWT Auth Middleware
+    participant DB as SQLite Database
+    participant Graph as Jigsaw Graph Engine
+
+    Operator->>UI: Login with credentials
+    UI->>API: POST /api/v1/auth/login
+    API->>Auth: Validate credentials
+    Auth-->>API: Return JWT token
+    API-->>UI: Bearer token
+
+    Operator->>UI: Open Dashboard
+    UI->>API: GET /api/v1/network/graph
+    API->>Auth: Verify JWT
+    Auth-->>API: Authorized
+    API->>Graph: Fetch current topology
+    Graph-->>API: Nodes, edges, statuses
+    API-->>UI: JSON network response
+    UI-->>Operator: Render real digital road map
+
+    Operator->>UI: Click road to block
+    UI->>API: PATCH /api/v1/network/roads/{id}/status
+    API->>Graph: Update edge cost to infinity
+    API->>DB: Persist status change
+    API-->>UI: Updated road state
+    UI-->>Operator: Road turns black on map
+`
+

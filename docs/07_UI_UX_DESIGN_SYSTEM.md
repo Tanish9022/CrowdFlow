@@ -62,3 +62,40 @@ The visual language communicates:
    - ➡️ **Recommended Detour Path** pulses with animated directional highlights.
 4. **Buttons & Controls:** Clear hover transitions (200ms ease), focused accessibility outlines, disabled states clearly marked with 50% opacity and `cursor: not-allowed`.
 5. **Alert Banners:** Non-intrusive sticky top/side notifications with dismiss and "Investigate on Map" deep-links.\n
+
+
+## Design System Component Hierarchy
+
+`mermaid
+flowchart TD
+    subgraph "Design Tokens"
+        T1["Color Palette - Obsidian Dark Theme"]
+        T2["Typography - Inter + JetBrains Mono"]
+        T3["Spacing Scale - 4px base unit"]
+        T4["Shadow System - Subtle depth layers"]
+    end
+
+    subgraph "Base Components"
+        C1["Button - Primary, Danger, Ghost"]
+        C2["Card - Glass morphism panels"]
+        C3["Badge - Status indicators"]
+        C4["Tooltip - Contextual info"]
+    end
+
+    subgraph "Domain Components"
+        D1["RealMapCanvas - Leaflet road map"]
+        D2["Video Player - MJPEG with overlays"]
+        D3["KPI Widget - Metric cards"]
+        D4["Signal Card - Timing advisory"]
+    end
+
+    T1 --> C1
+    T2 --> C2
+    T3 --> C3
+    T4 --> C4
+    C1 --> D1
+    C2 --> D2
+    C3 --> D3
+    C4 --> D4
+`
+

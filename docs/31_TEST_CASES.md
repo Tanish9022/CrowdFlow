@@ -16,3 +16,31 @@ The following formal test cases validate the core functional and algorithmic com
 | **TC-SIM-01**| What-If Sim | Divert $1000\text{ vph}$ from $R_3$ to parallel $R_4, R_5$. | Flow distributed proportionally to residual capacity. | Total displaced volume conserved. |
 | **TC-SIG-01**| Signal Advisory| Detour approach volume surges from 300 to 900 vph. | Green phase recommendation increases (e.g., $+20\text{ s}$). | Rebalanced split within safety limits ($15\text{ s} \le g \le 70\text{ s}$). |
 | **TC-API-01**| Security | Request `/api/v1/network/roads` without JWT token. | HTTP 401 Unauthorized returned. | Authentication enforced. |
+
+
+## Test Case Coverage Map
+
+`mermaid
+flowchart TD
+    subgraph "Unit Tests"
+        U1["Dijkstra shortest path correctness"]
+        U2["Traffic state classification accuracy"]
+        U3["Simulation redistribution math"]
+        U4["Webster signal split calculation"]
+        U5["JWT token generation + validation"]
+    end
+
+    subgraph "Integration Tests"
+        I1["GET /network/graph returns valid topology"]
+        I2["PATCH road status updates graph weights"]
+        I3["POST /routing/calculate avoids blocked roads"]
+        I4["POST /simulation/run returns valid deltas"]
+        I5["Auth login returns valid JWT"]
+    end
+
+    subgraph "End-to-End Tests"
+        E1["Full disruption detection to advisory workflow"]
+        E2["Dashboard renders map with live traffic colors"]
+    end
+`
+

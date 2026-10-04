@@ -38,3 +38,28 @@
 ### Operational Feasibility (SPPU Viva Context)
 - Highly demonstrable on a standard student laptop during oral examination.
 - Every mathematical step (graph cost, queue formula, green split advisory) is transparent and explainable to examiners.\n
+
+
+## Scope Boundary Diagram
+
+`mermaid
+flowchart LR
+    subgraph "In Scope"
+        A1["CCTV video analysis"]
+        A2["Vehicle detection + tracking"]
+        A3["Traffic state classification"]
+        A4["Dynamic road graph"]
+        A5["Route optimization"]
+        A6["What-If simulation"]
+        A7["Signal advisory"]
+    end
+
+    subgraph "Out of Scope"
+        B1["Hardware signal actuation"]
+        B2["City-wide deployment"]
+        B3["GPS-based vehicle tracking"]
+        B4["Cloud infrastructure"]
+        B5["Mobile app for drivers"]
+    end
+`
+

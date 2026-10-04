@@ -32,3 +32,32 @@
 
 ### Q8: Does your system directly control real traffic lights?
 **Answer:** No. Directly actuating municipal traffic controllers involves strict legal, safety, and physical fail-safe regulations. In our academic prototype, signal timing outputs are explicitly designated as **Advisory Recommendations** for human traffic police operators to review and implement.
+
+
+## Viva Topic Coverage Map
+
+`mermaid
+mindmap
+    root["Crowd Flow Viva Topics"]
+        Computer Vision
+            YOLOv8 architecture
+            Object detection vs tracking
+            ROI polygon filtering
+        Traffic Engineering
+            Traffic state classification
+            Queue persistence detection
+            Webster signal timing
+        Graph Theory
+            Dijkstra algorithm
+            Dynamic edge re-weighting
+            Jigsaw missing piece analogy
+        Software Engineering
+            FastAPI async architecture
+            React component design
+            SQLite WAL concurrency
+        Machine Learning
+            Transfer learning rationale
+            Random Forest features
+            Anti-data-leakage splitting
+`
+

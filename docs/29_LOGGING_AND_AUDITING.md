@@ -26,3 +26,39 @@ Every critical operator action is immutably recorded in the `AUDIT_LOGS` databas
 - **Manual Overrides:** When an operator forces a road state to `BLOCKED`.
 - **Signal Implementations:** When an operator approves or dismisses an advisory signal split plan.
 - **Configuration Modifications:** Changes to camera ROIs, lane capacities, or detection thresholds.
+
+
+## Logging Architecture
+
+`mermaid
+flowchart LR
+    subgraph "Event Sources"
+        A1["API Requests"]
+        A2["Auth Events"]
+        A3["Road Status Changes"]
+        A4["Simulation Runs"]
+        A5["Signal Advisories"]
+    end
+
+    subgraph "Logging Pipeline"
+        L1["Structured JSON Logger"]
+        L2["Timestamp + Severity + Context"]
+    end
+
+    subgraph "Output"
+        O1["Console - Development"]
+        O2["Log File - Production"]
+        O3["Audit Trail DB Table"]
+    end
+
+    A1 --> L1
+    A2 --> L1
+    A3 --> L1
+    A4 --> L1
+    A5 --> L1
+    L1 --> L2
+    L2 --> O1
+    L2 --> O2
+    L2 --> O3
+`
+

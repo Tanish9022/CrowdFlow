@@ -56,3 +56,26 @@ clip_003.mp4,CAM_02,30,1.5,0.75,0.85,25.0,1,SIGNAL_QUEUE
 clip_004.mp4,CAM_03,4,0.0,0.40,1.00,180.0,120,PEDESTRIAN_CROWD
 clip_005.mp4,CAM_04,0,0.0,0.00,0.00,0.0,0,BLOCKED
 ```\n
+
+
+## 3. Annotation and Data Pipeline
+
+`mermaid
+flowchart LR
+    A["CCTV Video Clips"] --> B["Frame Extraction"]
+    B --> C["LabelImg / CVAT Annotation"]
+    C --> D["YOLO Format Labels"]
+    D --> E{"Video-Level Split"}
+    E --> F["Train Set - 70%"]
+    E --> G["Val Set - 15%"]
+    E --> H["Test Set - 15%"]
+
+    subgraph "Anti-Leakage Rule"
+        I["All frames from one video stay in same split"]
+    end
+
+    F --> J["YOLOv8 Fine-Tuning"]
+    G --> K["Validation Monitoring"]
+    H --> L["Final Evaluation"]
+`
+

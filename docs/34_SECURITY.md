@@ -14,3 +14,20 @@ While designed as an academic prototype, Crowd Flow incorporates defense-in-dept
    - CORS middleware restricted to designated frontend origin (`http://localhost:5173`).
 4. **Credential Safety:**
    - Zero hardcoded passwords, tokens, or secret keys in source code; `.env.example` provided for safe environment setup.
+
+
+## Security Architecture
+
+`mermaid
+flowchart TD
+    USER["Operator"] --> LOGIN["Login Form"]
+    LOGIN --> BCRYPT["bcrypt Password Hash Verification"]
+    BCRYPT --> JWT["JWT Token Generation - HS256"]
+    JWT --> HEADER["Authorization: Bearer Token"]
+    HEADER --> MW["FastAPI Security Middleware"]
+    MW --> ROLE{"Role Check"}
+    ROLE -- Admin --> ADMIN["Full Access"]
+    ROLE -- Operator --> OPS["Read + Control Access"]
+    ROLE -- Viewer --> VIEW["Read-Only Access"]
+`
+

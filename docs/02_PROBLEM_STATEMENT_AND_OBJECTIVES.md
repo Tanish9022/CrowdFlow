@@ -31,3 +31,29 @@ Existing traffic surveillance systems in municipal command centers suffer from t
 - Accurate differentiation between signal queues (dispersing when light turns green) and persistent congestion queues with $>90\%$ simulated rule fidelity.
 - Sub-50ms recalculation of alternative routes for a 20-node, 40-edge urban test network upon road closure.
 - Zero reliance on external paid mapping APIs (Google Maps API, Mapbox) for core routing and graph operations.\n
+
+
+## Problem Space Overview
+
+`mermaid
+flowchart TD
+    subgraph "Urban Traffic Challenges"
+        P1["Unpredictable road blockages"]
+        P2["Static signal timers"]
+        P3["No real-time rerouting"]
+        P4["Delayed incident detection"]
+    end
+
+    subgraph "Crowd Flow Solution"
+        S1["CCTV + AI detection"]
+        S2["Dynamic graph re-weighting"]
+        S3["Dijkstra-based detour routing"]
+        S4["Webster signal advisory"]
+    end
+
+    P1 --> S1
+    P2 --> S4
+    P3 --> S3
+    P4 --> S2
+`
+

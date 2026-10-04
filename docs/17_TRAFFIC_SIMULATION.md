@@ -52,3 +52,25 @@ When an operator executes a simulation, the service produces a comparative delta
   ]
 }
 ```
+
+
+## 4. Simulation Process Flow
+
+`mermaid
+flowchart TD
+    A["Operator selects road to block"] --> B["Mark road e_b as BLOCKED"]
+    B --> C["Calculate displaced volume Q"]
+    C --> D["Identify M alternative detour paths"]
+    D --> E["Compute Logit capacity-elasticity weights"]
+    E --> F{"For each detour path P_m"}
+    F --> G["Calculate flow proportion gamma_m"]
+    G --> H["Project new volume on each edge"]
+    H --> I["Compute simulated occupancy ratio"]
+    I --> J{"Is edge overloaded?"}
+    J -- Yes --> K["Flag as CONGESTED / OVERLOADED"]
+    J -- No --> L["Keep current status"]
+    K --> M["Generate Before vs After delta report"]
+    L --> M
+    M --> N["Render comparative visualization to operator"]
+`
+

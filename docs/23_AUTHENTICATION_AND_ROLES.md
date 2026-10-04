@@ -29,3 +29,29 @@ The system employs stateless JSON Web Token (JWT) authentication using the HMAC-
   "iat": 1790678400
 }
 ```
+
+
+## Authentication Flow
+
+`mermaid
+sequenceDiagram
+    actor User as Operator
+    participant UI as React Frontend
+    participant API as FastAPI
+    participant Auth as Security Module
+    participant DB as User Database
+
+    User->>UI: Enter username + password
+    UI->>API: POST /api/v1/auth/login
+    API->>Auth: bcrypt verify password
+    Auth->>DB: Lookup user record
+    DB-->>Auth: User found, hash matches
+    Auth-->>API: Generate JWT token (exp: 24h)
+    API-->>UI: Return Bearer token
+    UI->>UI: Store token in localStorage
+    UI->>API: GET /api/v1/auth/me (Authorization: Bearer)
+    API->>Auth: Validate JWT signature
+    Auth-->>API: Decoded user payload
+    API-->>UI: User profile + role
+`
+

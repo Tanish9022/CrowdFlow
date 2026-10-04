@@ -33,3 +33,53 @@ The end-to-end oral examination demo is structured as a clear 5-act narrative de
   - Cross-street green phase adjusted to maintain cycle balance.
 - Operator clicks "Acknowledge & Implement Advisory".
 - Summary telemetry shows simulated detour delay reduced by $38\%$.
+
+
+## 2. Demo Flow Sequence
+
+`mermaid
+sequenceDiagram
+    actor Examiner as SPPU Examiner
+    actor Operator as Demo Operator
+    participant UI as React Dashboard
+    participant API as FastAPI Backend
+    participant Graph as Jigsaw Graph Engine
+    participant Sim as Simulation Engine
+    participant Sig as Signal Advisory Engine
+
+    Note over Examiner,Sig: Act 1 - Baseline Normal State
+    Operator->>UI: Open Dashboard
+    UI->>API: GET /network/graph
+    API-->>UI: All roads GREEN/OPEN
+    UI-->>Examiner: All roads shown green on real map
+
+    Note over Examiner,Sig: Act 2 - Sudden Disruption
+    Operator->>UI: Click Road R3, Mark as BLOCKED
+    UI->>API: PATCH /network/roads/R3/status BLOCKED
+    API->>Graph: Set W(R3) = infinity
+    API-->>UI: Road R3 turns black, alert triggered
+    UI-->>Examiner: Red alert ticker appears
+
+    Note over Examiner,Sig: Act 3 - Dynamic Rerouting
+    Operator->>UI: Request route J1 to J6
+    UI->>API: POST /routing/calculate
+    API->>Graph: Dijkstra avoiding R3
+    API-->>UI: Detour via J1-J4-J5-J6
+    UI-->>Examiner: Green detour highlighted on map
+
+    Note over Examiner,Sig: Act 4 - What-If Simulation
+    Operator->>UI: Run simulation for R3 closure
+    UI->>API: POST /simulation/run
+    API->>Sim: Redistribute R3 volume
+    Sim-->>API: Before/After delta
+    API-->>UI: Show occupancy changes
+    UI-->>Examiner: R6 jumps to 86% CONGESTED
+
+    Note over Examiner,Sig: Act 5 - Signal Advisory
+    API->>Sig: Generate advisory for Junction 5
+    Sig-->>API: NS green +20s, EW green -18s
+    API-->>UI: Advisory signal plan
+    Operator->>UI: Acknowledge advisory
+    UI-->>Examiner: Delay reduced by 38%
+`
+

@@ -41,3 +41,25 @@ RECOMMENDED ADVISORY PLAN:
 
 Expected Impact: Prevents detour queue spillback by 42%; estimated average vehicle delay reduction = 18.5 seconds/veh.
 ```
+
+
+## 4. Signal Advisory Generation Flow
+
+`mermaid
+flowchart TD
+    A["Road blocked, detour traffic surges"] --> B["Identify downstream junctions on detour"]
+    B --> C["Measure observed volumes per approach arm"]
+    C --> D["Calculate flow ratios y_i = q_i / S_i"]
+    D --> E["Compute total flow ratio Y"]
+    E --> F["Distribute green time: g_i = y_i/Y * G_total"]
+    F --> G{"g_i within bounds?"}
+    G -- "g_i < g_min" --> H["Clamp to g_min = 15s"]
+    G -- "g_i > g_max" --> I["Clamp to g_max = 70s"]
+    G -- "Within bounds" --> J["Accept computed g_i"]
+    H --> K["Generate Advisory Signal Plan"]
+    I --> K
+    J --> K
+    K --> L["Present to operator for approval"]
+    L --> M["Operator acknowledges and implements"]
+`
+

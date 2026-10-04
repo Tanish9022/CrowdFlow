@@ -42,3 +42,32 @@ Where:
 - Model: `RandomForestClassifier(n_estimators=100, max_depth=6, class_weight='balanced')`
 - Validation Strategy: Stratified 5-Fold Cross Validation grouped by Video ID.
 - Baseline Accuracy Target: $\ge 88\%$ cross-validation macro F1-score across 7 traffic states.
+
+
+## 4. Training Pipeline Flow
+
+`mermaid
+flowchart TD
+    A["Raw Video Footage from Pune Roads"] --> B["Frame Extraction at 1-5 FPS"]
+    B --> C["Manual Annotation with LabelImg/CVAT"]
+    C --> D["Export YOLO format labels"]
+    D --> E["Video-level train/val/test split"]
+    E --> F["Load YOLOv8n pretrained weights"]
+    F --> G["Fine-tune with Mosaic + HSV augmentation"]
+    G --> H{"Evaluate on test set"}
+    H -- "mAP@0.5 >= 0.75" --> I["Export optimized model"]
+    H -- "mAP@0.5 < 0.75" --> J["Adjust hyperparameters"]
+    J --> G
+    I --> K["Deploy to CV Pipeline"]
+
+    subgraph "Traffic State Classifier"
+        L["Extract kinematic features per clip"] --> M["Build feature vector"]
+        M --> N["Train RandomForest with 5-fold CV"]
+        N --> O{"Macro F1 >= 0.88?"}
+        O -- Yes --> P["Export classifier model"]
+        O -- No --> Q["Tune max_depth / n_estimators"]
+        Q --> N
+        P --> R["Deploy to Traffic State Engine"]
+    end
+`
+

@@ -40,3 +40,33 @@ npm run dev
 - **Default Credentials:**
   - Admin: `admin` / `admin123`
   - Operator: `operator` / `operator123`
+
+
+## 2. Deployment Architecture
+
+`mermaid
+flowchart LR
+    subgraph "Client Machine"
+        Browser["Web Browser - localhost:5173"]
+    end
+
+    subgraph "Frontend Server"
+        Vite["Vite Dev Server - Port 5173"]
+        React["React 18 SPA"]
+    end
+
+    subgraph "Backend Server"
+        Uvicorn["Uvicorn ASGI - Port 8000"]
+        FastAPI["FastAPI Application"]
+        SQLite["SQLite Database - WAL Mode"]
+        Graph["In-Memory Jigsaw Graph"]
+    end
+
+    Browser --> Vite
+    Vite --> React
+    React -- "REST API + JWT" --> Uvicorn
+    Uvicorn --> FastAPI
+    FastAPI --> SQLite
+    FastAPI --> Graph
+`
+

@@ -48,3 +48,36 @@ The user-facing interface does **not** display abstract puzzle shapes or node-li
   - 📍 **Start Location & Destination Pins** clearly mark origin and target junctions.
   - ➡️ **Route Highlight Path:** Animates with directional highlights along the recommended detour corridor.
 - **Interactive Inspection:** Hovering or clicking on any road link displays the Selected Link HUD drawer with live camera snapshots, velocity, and occupancy metrics.
+
+
+## 3. Frontend Component Architecture
+
+`mermaid
+flowchart TD
+    A["App.jsx - Route Definitions"] --> B["MainLayout"]
+    B --> C["Navbar - System KPIs"]
+    B --> D["Sidebar - Navigation"]
+    B --> E{"Active Page"}
+    E --> F["Dashboard"]
+    E --> G["Monitoring"]
+    E --> H["RouteOptimizer"]
+    E --> I["Simulator"]
+    E --> J["SignalAdvisory"]
+
+    F --> K["RealMapCanvas - Leaflet + OSM"]
+    F --> L["Road Detail HUD Drawer"]
+    F --> M["Disruption Ticker"]
+
+    G --> N["MJPEG Video Grid"]
+    G --> O["Detection Overlay Canvas"]
+
+    H --> P["Route Calculator"]
+    H --> Q["Detour Path Visualizer"]
+
+    I --> R["Before/After Comparison"]
+    I --> S["Redistribution Delta Table"]
+
+    J --> T["Signal Timing Cards"]
+    J --> U["Acknowledge Button"]
+`
+

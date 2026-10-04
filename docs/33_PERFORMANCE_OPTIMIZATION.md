@@ -15,3 +15,31 @@ Because the target academic hardware does not assume a dedicated discrete GPU, t
    - All spatial calculations (polygon tests, bounding box intersections) use vectorized C-extensions rather than pure Python loops.
 5. **In-Memory Graph Representation:**
    - Dijkstra and network graphs are cached in memory using dictionary adjacency matrices, executing queries in $< 2\text{ milliseconds}$.
+
+
+## Performance Optimization Strategy
+
+`mermaid
+flowchart TD
+    subgraph "Backend Optimizations"
+        B1["SQLite WAL mode - concurrent reads"]
+        B2["NullPool - no connection contention"]
+        B3["In-memory graph cache"]
+        B4["Async endpoints - non-blocking I/O"]
+        B5["Cached ML model loading"]
+    end
+
+    subgraph "Frontend Optimizations"
+        F1["Lazy component loading"]
+        F2["Debounced API calls"]
+        F3["Canvas-based map rendering"]
+        F4["Error boundary with retry"]
+    end
+
+    subgraph "ML Pipeline Optimizations"
+        M1["YOLOv8 Nano - 3.2M params"]
+        M2["640x640 input resolution"]
+        M3["Background thread inference"]
+    end
+`
+

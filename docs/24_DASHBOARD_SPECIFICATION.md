@@ -30,3 +30,33 @@ The main dashboard operates as the central cockpit for traffic surveillance and 
 2. **Network Health Ring:** Circular progress bar showing total network capacity utilization.
 3. **Selected Link Drawer:** Inspection panel with live CCTV snapshot, speed metrics, occupancy ratio, and one-click manual block/reopen toggle.
 4. **Advisory Signal Panel:** Synchronized green-split recommendations for downstream detour junctions.
+
+
+## 3. Dashboard Component Layout
+
+`mermaid
+flowchart TD
+    subgraph "Dashboard Page"
+        subgraph "Top KPI Bar"
+            A1["Active Cameras"]
+            A2["Avg Network Speed"]
+            A3["Bottleneck Corridors"]
+            A4["Blocked Roads"]
+        end
+
+        subgraph "Main Grid - 70% + 30%"
+            B1["Real Digital Road Map - Leaflet + OSM tiles"]
+            B2["Selected Road HUD Drawer"]
+        end
+
+        subgraph "Bottom Panel"
+            C1["Real-Time Disruption Log"]
+            C2["Advisory Signal Plan Status"]
+        end
+    end
+
+    B1 -- "Click road segment" --> B2
+    B2 -- "Toggle Blockage" --> B1
+    A4 -- "Count from" --> B1
+`
+

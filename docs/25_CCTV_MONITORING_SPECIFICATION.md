@@ -18,3 +18,20 @@ Each camera viewport features hardware-accelerated HTML5 Canvas overlays:
   - Stream Status: `LIVE (24.2 FPS)`
   - Active Vehicles inside ROI: `38`
   - Current Traffic State: `SIGNAL_QUEUE (Light RED: 14s remaining)`
+
+
+## CCTV Monitoring Data Flow
+
+`mermaid
+flowchart LR
+    CAM["CCTV Camera"] --> STREAM["MJPEG Stream Endpoint"]
+    STREAM --> GRID["Multi-Camera Grid Layout"]
+    GRID --> OVERLAY["Detection Overlay Canvas"]
+    OVERLAY --> HUD["HUD: FPS, Count, State"]
+
+    CAM --> YOLO["YOLOv8 Inference"]
+    YOLO --> BBOX["Bounding Boxes"]
+    BBOX --> TRACK["Centroid Tracker IDs"]
+    TRACK --> OVERLAY
+`
+

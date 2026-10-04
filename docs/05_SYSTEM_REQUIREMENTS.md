@@ -54,3 +54,35 @@
 ## 3. Network Requirements
 - Fully self-contained offline capability: System runs entirely on `localhost` (`127.0.0.1:8000` for backend, `127.0.0.1:5173` or `3000` for frontend).
 - No continuous external internet connection required during examination viva.\n
+
+
+## System Requirements Architecture
+
+`mermaid
+flowchart TD
+    subgraph "Hardware Requirements"
+        H1["Intel Core i3+ CPU"]
+        H2["8 GB RAM minimum"]
+        H3["CCTV Camera feeds"]
+    end
+
+    subgraph "Software Requirements"
+        S1["Python 3.10+ with FastAPI"]
+        S2["Node.js 18+ with React"]
+        S3["SQLite with WAL mode"]
+        S4["YOLOv8 Nano model"]
+    end
+
+    subgraph "Network Requirements"
+        N1["RTSP camera streams"]
+        N2["localhost REST API"]
+        N3["WebSocket telemetry"]
+    end
+
+    H1 --> S1
+    H2 --> S4
+    H3 --> N1
+    S1 --> N2
+    S2 --> N3
+`
+
