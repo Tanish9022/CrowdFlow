@@ -1,0 +1,13 @@
+# YOLOv8 Dataset Configuration
+path: ../dataset/detection
+train: images/train
+val: images/val
+test: images/test
+
+# Classes (Urban mobility focus)
+names:
+  0: person
+  1: motorcycle
+  2: car
+  3: bus
+  4: truck

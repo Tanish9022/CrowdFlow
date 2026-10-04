@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Model binaries & large weights
+*.pt
+*.onnx
+*.engine
+*.bin
+*.joblib
+models/yolo_runs/
+models/*.pt
+models/*.joblib
+
+# Node.js dependencies & builds
+node_modules/
+dist/
+build/
+.cache/
+
+# Local Environment Variables & Secrets
+.env
+.env.local
+
+# Databases & local logs
+*.sqlite3
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.log
+logs/
+
+# IDE & Editor artifacts
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS artifacts
+.DS_Store
+Thumbs.db
